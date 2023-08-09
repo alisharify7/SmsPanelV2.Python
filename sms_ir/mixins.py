@@ -63,7 +63,7 @@ class RequestsMixin :
     
     def fake_response(self, request):
         response = requests.models.Response()
-
+        response.headers["response_type"] = "fake_response"
         response.status_code = 503
         response.request = request
         response.url = request.url

@@ -50,9 +50,11 @@ class SmsIr(RequestsMixin, LoggerMixin):
         """
         Send message to multiple mobile numbers
         """
+        if not isinstance(numbers, list):
+            numbers = [numbers]
         
         url = f'{self.ENDPOINT}/v1/send/bulk/'
-
+        
         data = {
             'lineNumber': linenumber or self._linenumber,
             'MessageText': message,
@@ -74,6 +76,18 @@ class SmsIr(RequestsMixin, LoggerMixin):
         """
         Send multiple messages to multiple mobile numbers pair to pair
         """
+
+
+        if not isinstance(numbers, list):
+            numbers = [numbers]
+        
+        if not isinstance(messages, list):
+            messages = [messages]
+
+        if not isinstance(send_date_time, str):
+            send_date_time = str(send_date_time)
+        
+        
         
         url = f'{self.ENDPOINT}/v1/send/liketolike/'
 
@@ -112,6 +126,10 @@ class SmsIr(RequestsMixin, LoggerMixin):
         """
         Send verification code with predefined template
         """
+
+        if not isinstance(parameters, list):
+            parameters = [parameters]
+
         
         url = f'{self.ENDPOINT}/v1/send/verify/'
 
@@ -185,6 +203,12 @@ class SmsIr(RequestsMixin, LoggerMixin):
         """
         get report of Archived Messages
         """
+        if not isinstance(from_date, str):
+            from_date = str(from_date)
+
+        if not isinstance(to_date, str):
+            to_date = str(to_date)
+            
 
         url = f'{self.ENDPOINT}/v1/send/archive/'
 
